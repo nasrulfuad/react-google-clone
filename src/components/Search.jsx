@@ -1,17 +1,25 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { Button } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import MicIcon from "@material-ui/icons/Mic";
-import { Button } from "@material-ui/core";
+import { useStateValue } from "../react_context/StateProvider";
+import { actionTypes } from "../react_context/reducer";
 import "../styles/Search.css";
 
 function Search({ hideButtons = false }) {
+    const [state, dispatch] = useStateValue();
     const [input, setInput] = useState("");
-
     const history = useHistory();
 
     const search = e => {
         e.preventDefault();
+
+        dispatch({
+            type: actionTypes.SET_SEARCH_TERM,
+            term: input,
+        });
+
         history.push("/search");
     };
 
