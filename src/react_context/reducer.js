@@ -14,11 +14,9 @@ const reducer = (state, action) => {
                 ...state,
                 term: action.term,
             };
-            break;
 
         default:
             return state;
-            break;
     }
 };
 

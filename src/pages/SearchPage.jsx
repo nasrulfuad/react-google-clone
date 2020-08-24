@@ -14,7 +14,7 @@ import "../styles/SearchPage.css";
 import Search from "../components/Search";
 
 function SearchPage() {
-    const [{ term }, dispatch] = useStateValue();
+    const [{ term }] = useStateValue();
     const { data } = GoogleSearch(term);
 
     term ?? useHistory().push("/");
@@ -30,7 +30,7 @@ function SearchPage() {
                     />
                 </Link>
                 <div className="searchPage__headerBody">
-                    <Search hideButtons />
+                    <Search hideButtons value={term} />
                     <div className="searchPage__options">
                         <div className="searchPage__optionsLeft">
                             <div className="searchPage__option">
@@ -98,7 +98,7 @@ function SearchPage() {
                                 className="searchPage__resultTitle"
                                 href={item.link}
                             >
-                                <h2>{item.title}</h2>
+                                <h3>{item.title}</h3>
                             </a>
                             <p className="searchPage__resultSnippet">
                                 {item.snippet}

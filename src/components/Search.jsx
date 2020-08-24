@@ -7,20 +7,20 @@ import { useStateValue } from "../react_context/StateProvider";
 import { actionTypes } from "../react_context/reducer";
 import "../styles/Search.css";
 
-function Search({ hideButtons = false }) {
-    const [state, dispatch] = useStateValue();
-    const [input, setInput] = useState("");
+function Search({ hideButtons = false, value = "" }) {
+    const [, dispatch] = useStateValue();
+    const [input, setInput] = useState(value);
     const history = useHistory();
 
     const search = e => {
         e.preventDefault();
-
-        dispatch({
-            type: actionTypes.SET_SEARCH_TERM,
-            term: input,
-        });
-
-        history.push("/search");
+        if (input) {
+            dispatch({
+                type: actionTypes.SET_SEARCH_TERM,
+                term: input,
+            });
+            history.push("/search");
+        }
     };
 
     return (
