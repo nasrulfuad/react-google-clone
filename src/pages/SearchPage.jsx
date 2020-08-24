@@ -17,7 +17,7 @@ import Search from "../components/Search";
 function SearchPage() {
     const [{ term }, dispatch] = useStateValue();
     // const { data } = GoogleSearch(term);
-    console.log(data);
+    // console.log(data);
 
     return (
         <div className="searchPage">
@@ -69,7 +69,7 @@ function SearchPage() {
                     </div>
                 </div>
             </div>
-            {true && (
+            {term && (
                 <div className="searchPage__results">
                     <p className="searchPage__resultCount">
                         About {data?.searchInformation.formattedTotalResults}
@@ -79,6 +79,18 @@ function SearchPage() {
                     {data?.items.map(item => (
                         <div className="searchPage__result">
                             <a href={item.link}>
+                                {item.pagemap?.cse_image?.length > 0 &&
+                                    item.pagemap?.cse_image[0]?.src && (
+                                        <img
+                                            src={
+                                                item.pagemap?.cse_image
+                                                    ?.length > 0 &&
+                                                item.pagemap?.cse_image[0]?.src
+                                            }
+                                            className="searchPage__resultImage"
+                                            alt=""
+                                        />
+                                    )}
                                 {item.displayLink}
                                 <ArrowDropDownIcon fontSize="small" />
                             </a>
