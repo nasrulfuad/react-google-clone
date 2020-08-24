@@ -6,18 +6,18 @@ import LocalOfferIcon from "@material-ui/icons/LocalOffer";
 import RoomIcon from "@material-ui/icons/Room";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useStateValue } from "../react_context/StateProvider";
 import GoogleSearch from "../components/GoogleSearch";
 import "../styles/SearchPage.css";
 
-import data from "../response.json";
 import Search from "../components/Search";
 
 function SearchPage() {
     const [{ term }, dispatch] = useStateValue();
-    // const { data } = GoogleSearch(term);
-    // console.log(data);
+    const { data } = GoogleSearch(term);
+
+    term ?? useHistory().push("/");
 
     return (
         <div className="searchPage">
